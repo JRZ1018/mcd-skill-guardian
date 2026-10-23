@@ -1,6 +1,6 @@
 # 麦麦契约哨兵 · McD Skill Guardian
 
-[在线演示](https://jrz1018.github.io/mcd-skill-guardian/) · [Skill](skills/mcd-skill-guardian/SKILL.md) · [真实查询摘要](evidence/live-verification.json)
+[在线演示](https://jrz1018.github.io/mcd-skill-guardian/) · [Skill](skills/mcd-skill-guardian/SKILL.md) · [真实查询摘要](evidence/live-verification.json) · [报名申请](https://github.com/M-China/mcd-developer-innovation-challenge/issues/1141)
 
 **接口变了，究竟影响了我的哪一次 Skill 调用？**
 
@@ -11,6 +11,8 @@
 它是一个调用依赖验证工具，不是录放代理。通过仅表示清单中这组参数满足该 `inputSchema`，不证明全部输入向后兼容、服务可用或整个 Skill 正确。实际业务响应检查单独记录。
 
 这是麦当劳程序员创意开发大赛的独立参赛作品，非麦当劳官方产品。使用 Codex 辅助开发，未申报 WorkBuddy 专项奖励。
+
+报名申请已提交，等待官方成功参赛回复。状态见 [参赛记录](evidence/contest-registration.json)，不将“已创建 Issue”表述为“已通过审核”。
 
 ## 30 秒体验
 

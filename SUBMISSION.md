@@ -16,4 +16,4 @@
 
 网页合成场景不代表官方真实变动，结果不证明所有输入兼容。原始实测、凭证、账户数据和本地报告均不进入发布包。
 
-报名状态单独记录；创建 Issue 不等于官方确认成功参赛，需以官方回复为准。
+报名申请：https://github.com/M-China/mcd-developer-innovation-challenge/issues/1141 。2026-10-23 17:55 北京时间提交，等待官方回复；状态见 evidence/contest-registration.json。创建 Issue 不等于官方确认成功参赛。
