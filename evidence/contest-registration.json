@@ -1,7 +1,11 @@
 {
-  "status": "submitted_waiting_official_confirmation",
+  "status": "officially_confirmed_participation",
   "repository": "https://github.com/JRZ1018/mcd-skill-guardian",
   "issue_url": "https://github.com/M-China/mcd-developer-innovation-challenge/issues/1141",
   "submitted_at": "2026-10-23T09:55:42Z",
-  "note": "报名申请已提交，尚未收到官方成功参赛回复；不代表入榜、获奖或最终资格审核通过。"
+  "confirmation_url": "https://github.com/M-China/mcd-developer-innovation-challenge/issues/1141#issuecomment-6362341015",
+  "confirmed_at": "2026-10-23T09:59:24Z",
+  "confirmed_by": "M-China-Official",
+  "official_reply": "您的作品已成功参赛，您可以通过官方项目的排行榜.md查看排名",
+  "note": "官方已确认成功参赛；不代表入榜、获奖或最终资格审核通过。"
 }
