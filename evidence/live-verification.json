@@ -1,0 +1,39 @@
+{
+  "format": "mcd-guardian.receipt.v1",
+  "mode": "live",
+  "captured_at": "2026-10-23T09:43:40.949804+00:00",
+  "server": "https://mcp.mcd.cn",
+  "calls": [
+    {
+      "skill_id": "watch-calendar",
+      "id": "default-calendar",
+      "tool": "campaign-calendar",
+      "business_status": "pass",
+      "checks": 1,
+      "check_issues": [],
+      "passed": true
+    },
+    {
+      "skill_id": "nutrition-example",
+      "id": "nutrition-list",
+      "tool": "list-nutrition-foods",
+      "business_status": "pass",
+      "checks": 1,
+      "check_issues": [],
+      "passed": true
+    },
+    {
+      "skill_id": "store-example",
+      "id": "public-landmark-stores",
+      "tool": "query-nearby-stores",
+      "business_status": "pass",
+      "checks": 1,
+      "check_issues": [],
+      "passed": true
+    }
+  ],
+  "passed": 3,
+  "total": 3,
+  "note": "本地生成的实测摘要，不是官方签名或资格证明；不复制参数、业务响应与原始异常。保留清单标识和检查位置，发布前请核对。",
+  "private_record_sha256": "8a54b798d2f2cefae6d03781d3b30c8085c35e43d717d67e3d691befbb05d6fe"
+}

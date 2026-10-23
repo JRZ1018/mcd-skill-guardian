@@ -1,0 +1,1015 @@
+{
+  "format": "mcd-guardian.demo.v1",
+  "baseline": {
+    "snapshot_summary": {
+      "captured_at": "2026-10-23T09:43:40.403877+00:00",
+      "tool_count": 35,
+      "selected_tools": 4,
+      "probe_passed": 3,
+      "probe_total": 3
+    },
+    "report": {
+      "format": "mcd-guardian.report.v1",
+      "mode": "real-baseline",
+      "before": {
+        "captured_at": "2026-10-23T09:43:40.403877+00:00",
+        "mode": "live"
+      },
+      "after": {
+        "captured_at": "2026-10-23T09:43:40.403877+00:00",
+        "mode": "live"
+      },
+      "summary": {
+        "skills": 3,
+        "calls": 3,
+        "regressions": 0,
+        "preexisting_failures": 0,
+        "improved": 0,
+        "unverifiable": 0,
+        "schema_changes": 0
+      },
+      "calls": [
+        {
+          "skill_id": "watch-calendar",
+          "skill_name": "麦麦不忘",
+          "id": "default-calendar",
+          "tool": "campaign-calendar",
+          "before": {
+            "valid": true,
+            "issues": []
+          },
+          "after": {
+            "valid": true,
+            "issues": []
+          },
+          "status": "pass",
+          "changes": [],
+          "arguments": {},
+          "before_schema": {
+            "properties": {
+              "specifiedDate": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "after_schema": {
+            "properties": {
+              "specifiedDate": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        {
+          "skill_id": "nutrition-example",
+          "skill_name": "示例 · 营养清单读取",
+          "id": "nutrition-list",
+          "tool": "list-nutrition-foods",
+          "before": {
+            "valid": true,
+            "issues": []
+          },
+          "after": {
+            "valid": true,
+            "issues": []
+          },
+          "status": "pass",
+          "changes": [],
+          "arguments": {},
+          "before_schema": {
+            "properties": {},
+            "type": "object"
+          },
+          "after_schema": {
+            "properties": {},
+            "type": "object"
+          }
+        },
+        {
+          "skill_id": "store-example",
+          "skill_name": "示例 · 公开地标找店",
+          "id": "public-landmark-stores",
+          "tool": "query-nearby-stores",
+          "before": {
+            "valid": true,
+            "issues": []
+          },
+          "after": {
+            "valid": true,
+            "issues": []
+          },
+          "status": "pass",
+          "changes": [],
+          "arguments": {
+            "beType": 1,
+            "searchType": 2,
+            "city": "上海",
+            "keyword": "人民广场"
+          },
+          "before_schema": {
+            "properties": {
+              "beType": {
+                "enum": [
+                  1,
+                  5
+                ],
+                "type": "integer"
+              },
+              "city": {
+                "type": "string"
+              },
+              "keyword": {
+                "type": "string"
+              },
+              "searchType": {
+                "enum": [
+                  1,
+                  2
+                ],
+                "type": "integer"
+              }
+            },
+            "required": [
+              "beType",
+              "searchType"
+            ],
+            "type": "object"
+          },
+          "after_schema": {
+            "properties": {
+              "beType": {
+                "enum": [
+                  1,
+                  5
+                ],
+                "type": "integer"
+              },
+              "city": {
+                "type": "string"
+              },
+              "keyword": {
+                "type": "string"
+              },
+              "searchType": {
+                "enum": [
+                  1,
+                  2
+                ],
+                "type": "integer"
+              }
+            },
+            "required": [
+              "beType",
+              "searchType"
+            ],
+            "type": "object"
+          }
+        }
+      ],
+      "changes": [],
+      "limitations": [
+        "只验证 manifest 显式列出的具体参数样例，不证明所有可能输入兼容，也不证明整个 Skill 正确。",
+        "比较过程完全离线，缺少工具属于明确失败；无法本地解析的 Schema 标为不可验证。",
+        "Schema 差异是结构变化记录，变化数量不等于破坏性变更数量。",
+        "未启用可选 format 断言；未覆盖未知 Schema 方言、全部自定义关键字或业务隐含约束。",
+        "本报告不执行响应检查；check_response 仅检查实际响应中的字段存在性与 JSON 类型。",
+        "一次响应的字段检查不代表官方长期输出契约、业务真实性、金额单位或未来服务状态。"
+      ]
+    }
+  },
+  "scenarios": [
+    {
+      "id": "required",
+      "title": "新增必填参数",
+      "description": "合成演练：活动接口要求 locale，空参数调用会怎样？",
+      "report": {
+        "format": "mcd-guardian.report.v1",
+        "mode": "synthetic-drill",
+        "before": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "live"
+        },
+        "after": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "synthetic"
+        },
+        "summary": {
+          "skills": 3,
+          "calls": 3,
+          "regressions": 1,
+          "preexisting_failures": 0,
+          "improved": 0,
+          "unverifiable": 0,
+          "schema_changes": 2
+        },
+        "calls": [
+          {
+            "skill_id": "watch-calendar",
+            "skill_name": "麦麦不忘",
+            "id": "default-calendar",
+            "tool": "campaign-calendar",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": false,
+              "issues": [
+                {
+                  "path": "/locale",
+                  "rule": "required",
+                  "message": "缺少必填字段。"
+                }
+              ]
+            },
+            "status": "regression",
+            "changes": [
+              {
+                "path": "/inputSchema/properties/locale",
+                "kind": "added",
+                "after": {
+                  "type": "string",
+                  "enum": [
+                    "zh-CN"
+                  ]
+                }
+              },
+              {
+                "path": "/inputSchema/required",
+                "kind": "added",
+                "after": [
+                  "locale"
+                ]
+              }
+            ],
+            "arguments": {},
+            "before_schema": {
+              "properties": {
+                "specifiedDate": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {
+                "specifiedDate": {
+                  "type": "string"
+                },
+                "locale": {
+                  "type": "string",
+                  "enum": [
+                    "zh-CN"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "locale"
+              ]
+            }
+          },
+          {
+            "skill_id": "nutrition-example",
+            "skill_name": "示例 · 营养清单读取",
+            "id": "nutrition-list",
+            "tool": "list-nutrition-foods",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {},
+            "before_schema": {
+              "properties": {},
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {},
+              "type": "object"
+            }
+          },
+          {
+            "skill_id": "store-example",
+            "skill_name": "示例 · 公开地标找店",
+            "id": "public-landmark-stores",
+            "tool": "query-nearby-stores",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {
+              "beType": 1,
+              "searchType": 2,
+              "city": "上海",
+              "keyword": "人民广场"
+            },
+            "before_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    1,
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    1,
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "changes": [
+          {
+            "tool": "campaign-calendar",
+            "path": "/inputSchema/properties/locale",
+            "kind": "added",
+            "after": {
+              "type": "string",
+              "enum": [
+                "zh-CN"
+              ]
+            }
+          },
+          {
+            "tool": "campaign-calendar",
+            "path": "/inputSchema/required",
+            "kind": "added",
+            "after": [
+              "locale"
+            ]
+          }
+        ],
+        "limitations": [
+          "只验证 manifest 显式列出的具体参数样例，不证明所有可能输入兼容，也不证明整个 Skill 正确。",
+          "比较过程完全离线，缺少工具属于明确失败；无法本地解析的 Schema 标为不可验证。",
+          "Schema 差异是结构变化记录，变化数量不等于破坏性变更数量。",
+          "未启用可选 format 断言；未覆盖未知 Schema 方言、全部自定义关键字或业务隐含约束。",
+          "本报告不执行响应检查；check_response 仅检查实际响应中的字段存在性与 JSON 类型。",
+          "一次响应的字段检查不代表官方长期输出契约、业务真实性、金额单位或未来服务状态。"
+        ]
+      }
+    },
+    {
+      "id": "enum",
+      "title": "枚举收窄",
+      "description": "合成演练：门店接口只接受 beType=5，现有 beType=1 调用受到影响。",
+      "report": {
+        "format": "mcd-guardian.report.v1",
+        "mode": "synthetic-drill",
+        "before": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "live"
+        },
+        "after": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "synthetic"
+        },
+        "summary": {
+          "skills": 3,
+          "calls": 3,
+          "regressions": 1,
+          "preexisting_failures": 0,
+          "improved": 0,
+          "unverifiable": 0,
+          "schema_changes": 2
+        },
+        "calls": [
+          {
+            "skill_id": "watch-calendar",
+            "skill_name": "麦麦不忘",
+            "id": "default-calendar",
+            "tool": "campaign-calendar",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {},
+            "before_schema": {
+              "properties": {
+                "specifiedDate": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {
+                "specifiedDate": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          {
+            "skill_id": "nutrition-example",
+            "skill_name": "示例 · 营养清单读取",
+            "id": "nutrition-list",
+            "tool": "list-nutrition-foods",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {},
+            "before_schema": {
+              "properties": {},
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {},
+              "type": "object"
+            }
+          },
+          {
+            "skill_id": "store-example",
+            "skill_name": "示例 · 公开地标找店",
+            "id": "public-landmark-stores",
+            "tool": "query-nearby-stores",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": false,
+              "issues": [
+                {
+                  "path": "/beType",
+                  "rule": "enum",
+                  "message": "参数不在 Schema 允许的枚举范围内。"
+                }
+              ]
+            },
+            "status": "regression",
+            "changes": [
+              {
+                "path": "/inputSchema/properties/beType/enum/0",
+                "kind": "changed",
+                "before": 1,
+                "after": 5
+              },
+              {
+                "path": "/inputSchema/properties/beType/enum/1",
+                "kind": "removed",
+                "before": 5
+              }
+            ],
+            "arguments": {
+              "beType": 1,
+              "searchType": 2,
+              "city": "上海",
+              "keyword": "人民广场"
+            },
+            "before_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    1,
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "changes": [
+          {
+            "tool": "query-nearby-stores",
+            "path": "/inputSchema/properties/beType/enum/0",
+            "kind": "changed",
+            "before": 1,
+            "after": 5
+          },
+          {
+            "tool": "query-nearby-stores",
+            "path": "/inputSchema/properties/beType/enum/1",
+            "kind": "removed",
+            "before": 5
+          }
+        ],
+        "limitations": [
+          "只验证 manifest 显式列出的具体参数样例，不证明所有可能输入兼容，也不证明整个 Skill 正确。",
+          "比较过程完全离线，缺少工具属于明确失败；无法本地解析的 Schema 标为不可验证。",
+          "Schema 差异是结构变化记录，变化数量不等于破坏性变更数量。",
+          "未启用可选 format 断言；未覆盖未知 Schema 方言、全部自定义关键字或业务隐含约束。",
+          "本报告不执行响应检查；check_response 仅检查实际响应中的字段存在性与 JSON 类型。",
+          "一次响应的字段检查不代表官方长期输出契约、业务真实性、金额单位或未来服务状态。"
+        ]
+      }
+    },
+    {
+      "id": "unrelated",
+      "title": "未使用接口变化",
+      "description": "合成演练：当前清单未使用的时间接口改变，不应被称为这三个调用发生退化。",
+      "report": {
+        "format": "mcd-guardian.report.v1",
+        "mode": "synthetic-drill",
+        "before": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "live"
+        },
+        "after": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "synthetic"
+        },
+        "summary": {
+          "skills": 3,
+          "calls": 3,
+          "regressions": 0,
+          "preexisting_failures": 0,
+          "improved": 0,
+          "unverifiable": 0,
+          "schema_changes": 2
+        },
+        "calls": [
+          {
+            "skill_id": "watch-calendar",
+            "skill_name": "麦麦不忘",
+            "id": "default-calendar",
+            "tool": "campaign-calendar",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {},
+            "before_schema": {
+              "properties": {
+                "specifiedDate": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {
+                "specifiedDate": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          {
+            "skill_id": "nutrition-example",
+            "skill_name": "示例 · 营养清单读取",
+            "id": "nutrition-list",
+            "tool": "list-nutrition-foods",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {},
+            "before_schema": {
+              "properties": {},
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {},
+              "type": "object"
+            }
+          },
+          {
+            "skill_id": "store-example",
+            "skill_name": "示例 · 公开地标找店",
+            "id": "public-landmark-stores",
+            "tool": "query-nearby-stores",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {
+              "beType": 1,
+              "searchType": 2,
+              "city": "上海",
+              "keyword": "人民广场"
+            },
+            "before_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    1,
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    1,
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "changes": [
+          {
+            "tool": "now-time-info",
+            "path": "/inputSchema/properties/timezone",
+            "kind": "added",
+            "after": {
+              "type": "string"
+            }
+          },
+          {
+            "tool": "now-time-info",
+            "path": "/inputSchema/required",
+            "kind": "added",
+            "after": [
+              "timezone"
+            ]
+          }
+        ],
+        "limitations": [
+          "只验证 manifest 显式列出的具体参数样例，不证明所有可能输入兼容，也不证明整个 Skill 正确。",
+          "比较过程完全离线，缺少工具属于明确失败；无法本地解析的 Schema 标为不可验证。",
+          "Schema 差异是结构变化记录，变化数量不等于破坏性变更数量。",
+          "未启用可选 format 断言；未覆盖未知 Schema 方言、全部自定义关键字或业务隐含约束。",
+          "本报告不执行响应检查；check_response 仅检查实际响应中的字段存在性与 JSON 类型。",
+          "一次响应的字段检查不代表官方长期输出契约、业务真实性、金额单位或未来服务状态。"
+        ]
+      }
+    },
+    {
+      "id": "removed",
+      "title": "依赖工具缺失",
+      "description": "合成演练：移除活动接口，定位依赖它的调用，而非把所有 Skill 都标红。",
+      "report": {
+        "format": "mcd-guardian.report.v1",
+        "mode": "synthetic-drill",
+        "before": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "live"
+        },
+        "after": {
+          "captured_at": "2026-10-23T09:43:40.403877+00:00",
+          "mode": "synthetic"
+        },
+        "summary": {
+          "skills": 3,
+          "calls": 3,
+          "regressions": 1,
+          "preexisting_failures": 0,
+          "improved": 0,
+          "unverifiable": 0,
+          "schema_changes": 1
+        },
+        "calls": [
+          {
+            "skill_id": "watch-calendar",
+            "skill_name": "麦麦不忘",
+            "id": "default-calendar",
+            "tool": "campaign-calendar",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": false,
+              "issues": [
+                {
+                  "path": "",
+                  "rule": "missing-tool",
+                  "message": "快照中缺少此调用依赖的工具。"
+                }
+              ]
+            },
+            "status": "regression",
+            "changes": [
+              {
+                "path": "",
+                "kind": "removed",
+                "before": {
+                  "inputSchema": {
+                    "properties": {
+                      "specifiedDate": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            ],
+            "arguments": {},
+            "before_schema": {
+              "properties": {
+                "specifiedDate": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "after_schema": null
+          },
+          {
+            "skill_id": "nutrition-example",
+            "skill_name": "示例 · 营养清单读取",
+            "id": "nutrition-list",
+            "tool": "list-nutrition-foods",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {},
+            "before_schema": {
+              "properties": {},
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {},
+              "type": "object"
+            }
+          },
+          {
+            "skill_id": "store-example",
+            "skill_name": "示例 · 公开地标找店",
+            "id": "public-landmark-stores",
+            "tool": "query-nearby-stores",
+            "before": {
+              "valid": true,
+              "issues": []
+            },
+            "after": {
+              "valid": true,
+              "issues": []
+            },
+            "status": "pass",
+            "changes": [],
+            "arguments": {
+              "beType": 1,
+              "searchType": 2,
+              "city": "上海",
+              "keyword": "人民广场"
+            },
+            "before_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    1,
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            },
+            "after_schema": {
+              "properties": {
+                "beType": {
+                  "enum": [
+                    1,
+                    5
+                  ],
+                  "type": "integer"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "keyword": {
+                  "type": "string"
+                },
+                "searchType": {
+                  "enum": [
+                    1,
+                    2
+                  ],
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "beType",
+                "searchType"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "changes": [
+          {
+            "tool": "campaign-calendar",
+            "path": "",
+            "kind": "removed",
+            "before": {
+              "inputSchema": {
+                "properties": {
+                  "specifiedDate": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        ],
+        "limitations": [
+          "只验证 manifest 显式列出的具体参数样例，不证明所有可能输入兼容，也不证明整个 Skill 正确。",
+          "比较过程完全离线，缺少工具属于明确失败；无法本地解析的 Schema 标为不可验证。",
+          "Schema 差异是结构变化记录，变化数量不等于破坏性变更数量。",
+          "未启用可选 format 断言；未覆盖未知 Schema 方言、全部自定义关键字或业务隐含约束。",
+          "本报告不执行响应检查；check_response 仅检查实际响应中的字段存在性与 JSON 类型。",
+          "一次响应的字段检查不代表官方长期输出契约、业务真实性、金额单位或未来服务状态。"
+        ]
+      }
+    }
+  ]
+}

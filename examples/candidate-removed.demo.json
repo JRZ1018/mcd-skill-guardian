@@ -1,0 +1,58 @@
+{
+  "format": "mcd-guardian.snapshot.v1",
+  "mode": "synthetic",
+  "server": "https://mcp.mcd.cn",
+  "captured_at": "2026-10-23T09:43:40.403877+00:00",
+  "discovered_tool_count": 34,
+  "published_tool_count": 4,
+  "projection_note": "从实际发现工具中选取四项输入契约，仅移除描述、标题、示例和默认值等注解；未公开业务响应或账户数据。",
+  "tools": [
+    {
+      "name": "list-nutrition-foods",
+      "inputSchema": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    {
+      "name": "now-time-info",
+      "inputSchema": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    {
+      "name": "query-nearby-stores",
+      "inputSchema": {
+        "properties": {
+          "beType": {
+            "enum": [
+              1,
+              5
+            ],
+            "type": "integer"
+          },
+          "city": {
+            "type": "string"
+          },
+          "keyword": {
+            "type": "string"
+          },
+          "searchType": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          }
+        },
+        "required": [
+          "beType",
+          "searchType"
+        ],
+        "type": "object"
+      }
+    }
+  ],
+  "synthetic_note": "由真实基线合成；不是官方接口真实变动或故障。captured_at沿用基线来源时间。"
+}

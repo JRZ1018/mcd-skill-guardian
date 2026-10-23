@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12251d">
+  <meta name="description" content="麦麦契约哨兵：声明 Skill 依赖与具体调用，沿着接口变化找到受影响的输入和验证规则。真实基线与合成演练明确分开。">
+  <title>麦麦契约哨兵 · McD Skill Guardian</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="masthead page-width">
+    <a class="brand" href="./" aria-label="麦麦契约哨兵首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>麦麦契约哨兵<small>MCD SKILL GUARDIAN</small></span></a>
+    <a class="source-link" href="https://github.com/JRZ1018/mcd-skill-guardian" target="_blank" rel="noopener">查看源码 <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero page-width" aria-labelledby="hero-title">
+      <div class="hero-copy"><p class="eyebrow"><span class="signal-dot" aria-hidden="true"></span> CONTRACT OBSERVATORY / 01</p><h1 id="hero-title">接口变化，<br>沿着调用<br><em>找到影响。</em></h1><p class="hero-description">把 Skill 依赖的工具和具体实参写成清单。<br>比较两份契约，让每一条调用退化都有依据。</p><a class="hero-anchor" href="#lab">进入交互实验室 <span aria-hidden="true">↓</span></a></div>
+      <aside class="instrument" aria-label="真实基线快照摘要">
+        <div class="instrument-top"><span>BASELINE / 真实基线</span><span class="instrument-cross" aria-hidden="true">＋</span></div>
+        <div class="instrument-number"><strong id="tool-count">—</strong><span>已发现工具<br><small>TOOLS DISCOVERED</small></span></div>
+        <div class="instrument-chain" aria-hidden="true"><span>SCHEMA</span><i></i><span>CALL</span><i></i><span>RULE</span></div>
+        <dl class="instrument-meta"><div><dt>采集时间</dt><dd id="captured-at">等待载入</dd></div><div><dt>只读探测</dt><dd id="probe-summary">以载入的摘要为准</dd></div></dl>
+        <p class="instrument-note">以下演练使用报告中的验证结果。网页不调用官方 MCP，也不执行验证引擎。</p>
+      </aside>
+    </section>
+
+    <section class="lab page-width" id="lab" aria-labelledby="lab-title">
+      <div class="lab-heading"><div><p class="eyebrow">TRACE THE DEPENDENCY</p><h2 id="lab-title">变化，落在哪一次调用？</h2></div><span class="lab-coordinate" aria-hidden="true">[ INPUT → IMPACT ]</span></div>
+      <div class="scenario-tabs" id="scenario-tabs" role="tablist" aria-label="选择真实基线或合成演练"><button type="button" id="tab-baseline" role="tab" aria-selected="true" aria-controls="report-panel" tabindex="0" data-scenario="baseline">真实基线</button></div>
+
+      <div class="load-state" id="load-state" role="status"><span class="load-line" aria-hidden="true"></span><p id="load-message">正在载入基线与演练报告…</p><button type="button" class="retry-button" id="retry" hidden>重新载入</button></div>
+      <noscript><p class="noscript">交互演示需要 JavaScript。你仍可在项目仓库查看 Skill 清单、报告和命令行用法。</p></noscript>
+      <div id="report-panel" role="tabpanel" aria-labelledby="tab-baseline" hidden>
+        <div class="scenario-intro"><span class="mode-label" id="mode-label">报告</span><div><h3 id="scenario-title"></h3><p id="scenario-description"></p></div><button type="button" class="export-button" id="export-report">下载当前报告 <span aria-hidden="true">↓</span></button></div>
+        <div class="report-metrics" aria-label="当前报告摘要"><div><strong id="metric-skills">—</strong><span>声明的 Skill</span></div><div><strong id="metric-calls">—</strong><span>具体调用</span></div><div class="regression-metric"><strong id="metric-regressions">—</strong><span>退化调用</span></div><div><strong id="metric-unverifiable">—</strong><span>无法验证</span></div><p id="metric-extra"></p></div>
+
+        <div class="graph-heading"><h3>一条依赖路径，三处证据。</h3><p><span class="legend-line" aria-hidden="true"></span> 橙线表示当前选中的路径 · 点击节点查看</p></div>
+        <div class="dependency-graph" id="dependency-graph">
+          <svg class="dependency-wires" id="dependency-wires" aria-hidden="true"></svg>
+          <section class="graph-column tools-column" aria-labelledby="tools-heading"><h4 id="tools-heading"><span>01</span> 接口工具 <small>TOOL</small></h4><div class="graph-nodes" id="tool-nodes"></div></section>
+          <section class="graph-column calls-column" aria-labelledby="calls-heading"><h4 id="calls-heading"><span>02</span> Skill 具体调用 <small>CALL</small></h4><div class="graph-nodes" id="call-nodes"></div></section>
+          <section class="graph-column rules-column" aria-labelledby="rules-heading"><h4 id="rules-heading"><span>03</span> 验证规则 <small>RULE</small></h4><div id="rule-node" class="rule-node"></div></section>
+        </div>
+
+        <div class="evidence-heading"><div><p class="eyebrow">EXAMINE THE EVIDENCE</p><h3 id="evidence-title">调用证据</h3><p id="evidence-description"></p></div><span id="call-status" class="status-label"></span></div>
+        <div class="arguments-strip"><span>DECLARED INPUT<br><b>声明的实参</b></span><pre id="arguments-code"></pre></div>
+        <div class="comparison"><section class="code-panel" aria-labelledby="before-heading"><div class="code-heading"><h4 id="before-heading">BEFORE <span>变化前</span></h4><span id="before-mode"></span></div><p class="code-caption" id="before-time"></p><div class="json-code" id="before-code" tabindex="0" role="region" aria-label="变化前的报告证据"></div></section><section class="code-panel after-panel" aria-labelledby="after-heading"><div class="code-heading"><h4 id="after-heading">AFTER <span>变化后</span></h4><span id="after-mode"></span></div><p class="code-caption" id="after-time"></p><div class="json-code" id="after-code" tabindex="0" role="region" aria-label="变化后的报告证据"></div></section></div>
+        <p class="evidence-footnote" id="evidence-footnote"></p>
+        <section class="impact-section" aria-labelledby="impact-title"><div><p class="eyebrow">WHAT THIS MEANS</p><h3 id="impact-title">影响解释</h3></div><ul id="impact-list"></ul></section>
+        <details class="limitations"><summary>查看报告范围与限制 <span aria-hidden="true">＋</span></summary><ul id="limitations-list"></ul></details>
+      </div>
+      <p class="scope-note">通过仅表示清单中的具体调用满足该 schema，不保证所有输入或实际业务结果。合成演练不表示官方接口发生过对应变化，也不代表已经测试模型行为。</p>
+      <p id="live-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
+    <section class="workflow page-width" aria-labelledby="workflow-title"><div><p class="eyebrow">BRING YOUR OWN MANIFEST</p><h2 id="workflow-title">让自己的 Skill，<br>也有一份依赖清单。</h2><p class="workflow-copy">在本地保存契约，明确声明工具和 arguments，<br>再用命令行检查前后快照中的具体调用。</p></div><div class="workflow-steps"><ol><li><span>01</span><div><h3>采集契约</h3><p>连接官方 MCP，保存当次发现的工具定义。</p></div></li><li><span>02</span><div><h3>声明依赖</h3><p>为每个 Skill 列出工具名与实际输入样例。</p></div></li><li><span>03</span><div><h3>离线比较</h3><p>查看具体调用的校验结果、规则和变化位置。</p></div></li></ol><div class="terminal"><div><span aria-hidden="true">● ● ●</span> LOCAL / CLI</div><pre><span class="terminal-prompt">$ </span>python -m mcd_guardian --help</pre></div><a class="readme-link" href="https://github.com/JRZ1018/mcd-skill-guardian#readme" target="_blank" rel="noopener">查看完整安装与命令行说明 <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+
+  <footer class="page-width"><div class="footer-brand">MCD SKILL GUARDIAN <span>∎</span></div><p>麦当劳程序员创意开发大赛独立参赛作品，非麦当劳官方产品。<br>项目由 Codex 辅助开发；本页面含 AI 辅助设计与代码。</p><a href="https://github.com/JRZ1018/mcd-skill-guardian" target="_blank" rel="noopener">SOURCE CODE ↗</a></footer>
+</body>
+</html>

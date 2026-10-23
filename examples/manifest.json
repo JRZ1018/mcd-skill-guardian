@@ -1,0 +1,48 @@
+{
+  "format": "mcd-guardian.manifest.v1",
+  "skills": [
+    {
+      "id": "watch-calendar",
+      "name": "麦麦不忘",
+      "source": "https://github.com/JRZ1018/mcd-watch-calendar",
+      "calls": [
+        {
+          "id": "default-calendar",
+          "tool": "campaign-calendar",
+          "arguments": {},
+          "checks": [
+            {"pointer": "/structuredContent/data/dailyList", "type": "array"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nutrition-example",
+      "name": "示例 · 营养清单读取",
+      "calls": [
+        {
+          "id": "nutrition-list",
+          "tool": "list-nutrition-foods",
+          "arguments": {},
+          "checks": [
+            {"pointer": "/structuredContent/data", "type": "string"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "store-example",
+      "name": "示例 · 公开地标找店",
+      "calls": [
+        {
+          "id": "public-landmark-stores",
+          "tool": "query-nearby-stores",
+          "arguments": {"beType": 1, "searchType": 2, "city": "上海", "keyword": "人民广场"},
+          "checks": [
+            {"pointer": "/structuredContent/data", "type": "array"}
+          ]
+        }
+      ]
+    }
+  ]
+}
